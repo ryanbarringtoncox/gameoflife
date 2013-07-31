@@ -10,45 +10,57 @@ function assert(descrip, stmt) {
 
 var World = function(x,y) {
 
-  var self = this;
-  this.x = x;
-  this.y = y;
+  var getNeighborhood, width, height, lives;
+  width = x;
+  height = y;
+  lives = {}; 
 
-  this.lives = {}; 
+  getNeighborhood = function() {
+    console.log("boo");
+  }; 
 
   return {
 
     toString: function() {
-      console.log("This world is " + self.x + " by " + self.y);
+      console.log("This world is " + width + " by " + height);
     },
    
     hasLife: function(x,y) {
-      if (self.lives[x+"_"+y]) {
+      if (lives[x+"_"+y]) {
         return true;
       }  else {
         return false;
       }
     },
 
-    insertLife: function(x,y) {
-      if(x >= self.x || y >= self.y || y < 0 || x < 0) {
+    getNeighborCount: function(x,y) {
+      if (lives[x+"_"+y]) {
+        getNeighborhood();
+        return 1;
+      }  else {
         return -1;
-      } else {
-        var lifeString = x+"_"+y;
-        self.lives[lifeString] = true;
-        return self.lives;
       }
     },
 
-    printLives: function(x,y) {
-      console.log(Object.keys(self.lives).length + " lives are:");
-      for (var key in self.lives) {
+    insertLife: function(x,y) {
+      if(x >= width || y >= height || y < 0 || x < 0) {
+        return -1;
+      } else {
+        var lifeString = x+"_"+y;
+        lives[lifeString] = true;
+        return lives;
+      }
+    },
+
+    printLives: function() {
+      console.log(Object.keys(lives).length + " lives are:");
+      for (var key in lives) {
         console.log(key);
       };
     }, 
 
     removeLife: function(x,y) {
-      delete self.lives[x+"_"+y];
+      delete lives[x+"_"+y];
     }
   }
 
@@ -56,8 +68,9 @@ var World = function(x,y) {
 
 var world = new World(100, 100);
 //world.toString();
-assert("should pass", 1===world.insertLife(0,0));
-assert("should fail", 1===world.insertLife(100,0));
+assert("Tests insertLife()", 1!==world.insertLife(0,0));
+assert("Tests insertLife()", -1===world.insertLife(100,0));
+world.insertLife(0,0);
 world.insertLife(1,1);
 world.insertLife(22,1);
 world.insertLife(11,1);
@@ -69,3 +82,7 @@ assert("testing hasLife()", true===world.hasLife(1,1));
 assert("testing hasLife()", false===world.hasLife(99,1));
 world.removeLife(1,1);
 assert("Testing removeLife()", false===world.hasLife(1,1));
+world.insertLife(1,1);
+assert("Testing getNeighborCount()", -1===world.getNeighborCount(91,1));
+assert("Testing getNeighborCount()", 1===world.getNeighborCount(1,1));
+
