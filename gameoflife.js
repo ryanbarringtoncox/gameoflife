@@ -10,13 +10,20 @@ function assert(descrip, stmt) {
 
 var World = function(x,y) {
 
-  var getNeighborhood, width, height, lives;
+  var getNeighborhood, width, height, lives, offsets;
+
   width = x;
   height = y;
   lives = {}; 
+  offsets = [[-1,-1], [-1,0],  [-1,1],  [0,-1],  [0,1],  [1,-1],  [1,0],  [1,1] ];
 
-  getNeighborhood = function() {
-    console.log("boo");
+  getNeighborhood = function(x,y) {
+    var neighborhood = [];
+    offsets.forEach(function(offset) {
+      var curr = (x+offset[0]) + "_" + (y+offset[1]);
+      neighborhood.push(curr);
+    });
+    return neighborhood;
   }; 
 
   return {
@@ -35,8 +42,14 @@ var World = function(x,y) {
 
     getNeighborCount: function(x,y) {
       if (lives[x+"_"+y]) {
-        getNeighborhood();
-        return 1;
+        var living = 0;
+        var candidates = getNeighborhood(x,y);
+        candidates.forEach(function(c) {
+          if (lives[c]) {
+            living = living + 1; 
+          }  
+        });
+        return living;  
       }  else {
         return -1;
       }
@@ -84,5 +97,6 @@ world.removeLife(1,1);
 assert("Testing removeLife()", false===world.hasLife(1,1));
 world.insertLife(1,1);
 assert("Testing getNeighborCount()", -1===world.getNeighborCount(91,1));
-assert("Testing getNeighborCount()", 1===world.getNeighborCount(1,1));
+//assert("Testing getNeighborCount()", 1===world.getNeighborCount(1,1));
 
+assert("Testing getNeighborCount()", 1===world.getNeighborCount(0,0));
