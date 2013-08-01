@@ -45,20 +45,20 @@ function World(x,y) {
     },
 
     getLiveNabeCount: function(x,y) {
-        var living = 0;
-        var candidates = this.getNeighborhood(x,y);
-        candidates.forEach(function(c) {
-          if (lives[c]) {
-            living = living + 1; 
-          }  
-        });
-        return living;  
+      var living = 0;
+      var candidates = this.getNeighborhood(x,y);
+      candidates.forEach(function(c) {
+        if (lives[c]) {
+          living = living + 1; 
+        }  
+      });
+      return living;  
     },
 
     getLiveNabeCountString: function(nabe) {
-        var nums = nabe.split("_");
-        var count = this.getLiveNabeCount(parseInt(nums[0]), parseInt(nums[1]));
-        return count;
+      var nums = nabe.split("_");
+      var count = this.getLiveNabeCount(parseInt(nums[0]), parseInt(nums[1]));
+      return count;
     },
 
     insertLife: function(x,y) {
@@ -90,7 +90,7 @@ function World(x,y) {
     },
 
     update: function() {
-      var futureWorld = {};
+      var nextGeneration = {};
       var self = this;
       for (var key in lives) {
         //will this life survive?
@@ -98,23 +98,23 @@ function World(x,y) {
         //console.log(key + " has " + count + " living neighbors");
         if (count === 2 || count ===3) {
           //console.log(key + " will survive");
-          futureWorld[key] = true;
+          nextGeneration[key] = true;
         }
         //will birth occur?
         var nabes = this.getNeighborhoodString(key);
         //console.log("nabes are " + nabes);
         nabes.forEach(function(nabe) {
-          if (!futureWorld[nabe]) {
-            //console.log(nabe + " not in futureWorld yet");
+          if (!nextGeneration[nabe]) {
+            //console.log(nabe + " not in nextGeneration yet");
             var count = self.getLiveNabeCountString(nabe);
             if (count === 3) {
               //console.log(nabe + " is born");
-              futureWorld[nabe] = true;
+              nextGeneration[nabe] = true;
             }
           }
         });
       }
-      lives = futureWorld;
+      lives = nextGeneration;
     }
   }
 
