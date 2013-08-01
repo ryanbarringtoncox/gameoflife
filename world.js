@@ -96,7 +96,6 @@ function World(x,y) {
         if (!nextGeneration[nabe]) {
           var count = self.getLiveNabeCountString(nabe);
           if (count === 3) {
-            //console.log(nabe + " is born");
             nextGeneration[nabe] = true;
           }
         }
@@ -106,7 +105,6 @@ function World(x,y) {
         var count = this.getLiveNabeCountString(key);
         //console.log(key + " has " + count + " living neighbors");
         if (count === 2 || count ===3) {
-          //console.log(key + " will survive");
           nextGeneration[key] = true;
         }
         //will birth occur?
