@@ -4,6 +4,6 @@ var Assert = function(descrip, stmt) {
   } else {
     console.log("FAIL: " + descrip);
   }
-}
+};
 
 module.exports = Assert;

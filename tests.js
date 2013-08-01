@@ -26,5 +26,5 @@ assert = new Assert("Testing getLiveNabeCount()", 0===world.getLiveNabeCount(91,
 assert = new Assert("Testing getLiveNabeCount()", 1===world.getLiveNabeCount(1,1));
 assert = new Assert("Testing getLiveNabeCount()", 1===world.getLiveNabeCount(0,0));
 assert = new Assert("Testing getLiveNabeCount()", 0===world.getLiveNabeCount(22,1));
-delete world;
+world = null;
 

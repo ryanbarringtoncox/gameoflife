@@ -14,7 +14,7 @@ function World(x,y) {
       console.log(Object.keys(lives).length + " lives are:");
       for (var key in lives) {
         console.log(key);
-      }; 
+      } 
     }, 
 
     stringIt: function(x,y) {
@@ -40,7 +40,7 @@ function World(x,y) {
 
     getNeighborhoodString: function(life) {
       var nums = life.split("_");
-      var nabeHood = this.getNeighborhood(parseInt(nums[0]), parseInt(nums[1]));
+      var nabeHood = this.getNeighborhood(parseInt(nums[0],10), parseInt(nums[1],10));
       return nabeHood;
     },
 
@@ -57,7 +57,7 @@ function World(x,y) {
 
     getLiveNabeCountString: function(nabe) {
       var nums = nabe.split("_");
-      var count = this.getLiveNabeCount(parseInt(nums[0]), parseInt(nums[1]));
+      var count = this.getLiveNabeCount(parseInt(nums[0],10), parseInt(nums[1],10));
       return count;
     },
 
@@ -92,6 +92,15 @@ function World(x,y) {
     update: function() {
       var nextGeneration = {};
       var self = this;
+      function nabeCallback(nabe) {
+        if (!nextGeneration[nabe]) {
+          var count = self.getLiveNabeCountString(nabe);
+          if (count === 3) {
+            //console.log(nabe + " is born");
+            nextGeneration[nabe] = true;
+          }
+        }
+      }
       for (var key in lives) {
         //will this life survive?
         var count = this.getLiveNabeCountString(key);
@@ -102,22 +111,12 @@ function World(x,y) {
         }
         //will birth occur?
         var nabes = this.getNeighborhoodString(key);
-        //console.log("nabes are " + nabes);
-        nabes.forEach(function(nabe) {
-          if (!nextGeneration[nabe]) {
-            //console.log(nabe + " not in nextGeneration yet");
-            var count = self.getLiveNabeCountString(nabe);
-            if (count === 3) {
-              //console.log(nabe + " is born");
-              nextGeneration[nabe] = true;
-            }
-          }
-        });
+        nabes.forEach(nabeCallback);
       }
       lives = nextGeneration;
     }
-  }
+  };
 
-};
+}
 
 module.exports = World;
