@@ -29,10 +29,18 @@ function World(x,y) {
       }
     },
 
+    pacmanMath: function(a,b,dim) {
+      c = (a + b) % dim;
+      if (c < 0) {c = c + dim};
+      return c;
+    },
+
     getNeighborhood: function(x,y) {
+      var self = this;
       var neighborhood = [];
       offsets.forEach(function(offset) {
         var curr = (x+offset[0]) + "_" + (y+offset[1]);
+        var curr = (self.pacmanMath(x,offset[0],width) + "_" + self.pacmanMath(y,offset[1],height));
         neighborhood.push(curr);
       });
       return neighborhood;
