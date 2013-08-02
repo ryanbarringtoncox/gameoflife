@@ -1,4 +1,4 @@
-var World = require("./world.js");
+var World = require("../world.js");
 
 var w = new World(10,10);
 w.insertLife(4,4);
