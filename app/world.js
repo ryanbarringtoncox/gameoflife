@@ -52,6 +52,10 @@ function World(x,y) {
       return nabeHood;
     },
 
+    getLives: function() {
+      return lives;
+    },
+
     getLiveNabeCount: function(x,y) {
       var living = 0;
       var candidates = this.getNeighborhood(x,y);
