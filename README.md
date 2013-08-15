@@ -5,5 +5,11 @@ http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
     npm install -g brunch
 
-    brunch watch--server
+    cd gameoflife/
+
+    npm install
+
+    bower install
+
+    brunch watch --server
 
