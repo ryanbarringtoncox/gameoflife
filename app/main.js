@@ -2,8 +2,15 @@ var World = require('world'),
   PianoSprite = require('pianosprite'),
   sound, w;
 
+canvas = document.getElementById('main');
+context = canvas.getContext('2d');
+context.beginPath();
+context.rect(0,0,1,1,1);
+context.fillStyle = "black";
+context.fill();;
+
 sound = new PianoSprite();
-w = new World(10,10);
+w = new World(100,100);
 
 w.insertLife(0,0);
 w.insertLife(0,2);
