@@ -26,7 +26,11 @@ setInterval(function() {
 
   //push into notes array
   for (key in lives) {
-    var x = key[0];
+    console.log("key is " + key);
+    var xArr = key.split("_"); 
+    console.log("xArr is " + xArr);
+    var x = xArr[0];
+    console.log("x is " + x);
     if (notes.indexOf(x) < 0) {
       notes.push(x);
     }
@@ -34,6 +38,7 @@ setInterval(function() {
   
   //play each note
   notes.forEach(function(note) {
+    console.log("playing " + note);
     sound.play(note);
   });
     
@@ -58,4 +63,4 @@ setInterval(function() {
   //w.printWorld();
   //console.log("lives are " + lives);
   w.update();
-},500);
+},200);
