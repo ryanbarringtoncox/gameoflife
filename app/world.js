@@ -5,7 +5,9 @@ function World(x,y) {
   width = x;
   height = y;
   lives = {}; 
-  offsets = [[-1,-1], [-1,0],  [-1,1],  [0,-1],  [0,1],  [1,-1],  [1,0],  [1,1] ];
+  //this should scale dynamically
+  //offsets = [[-1,-1], [-1,0],  [-1,1],  [0,-1],  [0,1],  [1,-1],  [1,0],  [1,1] ];
+  offsets = [[-10,-10], [-10,0],  [-10,10],  [0,-10],  [0,10],  [10,-10],  [10,0],  [10,10] ];
 
   return {
 
@@ -83,6 +85,17 @@ function World(x,y) {
       }
     },
 
+    //takes array of strings like ['1_1', '3_4']
+    insertLives: function(cells) {
+      var self = this;
+      cells.forEach(function(cell) {
+        var nums = cell.split("_");
+        var x = parseInt(nums[0],10);
+        var y = parseInt(nums[1],10);
+        self.insertLife(x,y);
+      })
+    },
+
     printWorld: function() {
       for (var i = 0; i < y; i = i + 1) {
         var currLine = ""; 
@@ -102,6 +115,8 @@ function World(x,y) {
     },
 
     update: function() {
+      console.log("before updating lives are");
+      console.log(lives);
       var nextGeneration = {};
       var self = this;
       function nabeCallback(nabe) {
@@ -124,6 +139,8 @@ function World(x,y) {
         nabes.forEach(nabeCallback);
       }
       lives = nextGeneration;
+      console.log("after updating lives are");
+      console.log(lives);
     }
   };
 
