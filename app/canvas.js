@@ -1,16 +1,12 @@
-function Canvas(document,id) {
+function Canvas(document,canvasId) {
 
-  var canvas = document.getElementById('main');
+  //private vars
+  var canvas = document.getElementById(canvasId);
   var context = canvas.getContext('2d');
-
-  var squares = [];
-
+  var addedSquares = [];
   var mouseDown = false;
 
-  canvas.addEventListener("mousedown", onMouseDown, false);
-  canvas.addEventListener("mouseup", onMouseUp, false);
-  canvas.addEventListener("mousemove", onMouseMove, false);
- 
+  //event listeners
   function onMouseDown(e) {
     mouseDown = true;
     var x = e.pageX - canvas.offsetLeft;
@@ -19,11 +15,11 @@ function Canvas(document,id) {
     y = snapToGrid(y);
 
     var p = x+"_"+y;
-    if (squares.indexOf(p) < 0) {
-      squares.push(p);
+    if (addedSquares.indexOf(p) < 0) {
+      addedSquares.push(p);
       fillRect(x, y);
     }
-  }
+   }
 
   function onMouseMove(e) {
     
@@ -37,8 +33,8 @@ function Canvas(document,id) {
       y = snapToGrid(y);
 
       var p = x+"_"+y;
-      if (squares.indexOf(p) < 0) {
-        squares.push(p);
+      if (addedSquares.indexOf(p) < 0) {
+        addedSquares.push(p);
         fillRect(x, y);
       }
 
@@ -67,7 +63,12 @@ function Canvas(document,id) {
     context.stroke();
 
   }
+  
+  canvas.addEventListener("mousedown", onMouseDown, false);
+  canvas.addEventListener("mouseup", onMouseUp, false);
+  canvas.addEventListener("mousemove", onMouseMove, false);
  
+  //helpers 
   function snapToGrid(x) {
     var snapped = x - x%10;
     return (snapped);
@@ -80,6 +81,7 @@ function Canvas(document,id) {
     context.fill();
   }
 
+  //api
   return {
   
     context: context,
@@ -88,22 +90,26 @@ function Canvas(document,id) {
 
     height: canvas.height,
 
-    squares: squares,
+    addedSquares: addedSquares,
 
     init: drawGrid,
 
     render: function(w) {
-      console.log("render called");
+
+      console.log("render called and addedSquares are:");
+      console.log(addedSquares);
+      context.clearRect(0,0,canvas.width,canvas.height);
+
+      drawGrid();
+
       var lives = w.getLives();
 
-      console.log("lives are " + JSON.stringify(lives));
+      //console.log("lives are " + JSON.stringify(lives));
       for (var key in lives) {
-        console.log("inside loop");
         var cellStr = key;
         var cellArr = cellStr.split("_");
         var x = parseInt(cellArr[0], 10);
         var y = parseInt(cellArr[1], 10);
-        console.log("cell is " + x + "," + y);
 
         x = snapToGrid(x);
         y = snapToGrid(y);
@@ -111,12 +117,8 @@ function Canvas(document,id) {
         fillRect(x, y);
 
        }
-      
     }
-
-
   }
-
 }
 
 module.exports = Canvas;

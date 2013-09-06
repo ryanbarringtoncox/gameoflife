@@ -3,30 +3,26 @@
   var World = require('world'),
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
-    sound, w;
+    sound, w, canvas, startBtn;
 
   //sound = new PianoSprite();
 
-  var canvas = new Canvas(document, 'main');
-  console.log("canvas is " + canvas.width + "," + canvas.height);
-  var startBtn = $('#start');
-
+  canvas = new Canvas(document, 'main');
   canvas.init();
+  startBtn = $('#start');
 
   w = new World(canvas.width-1,canvas.height-1);
 
-
   startBtn.click(function() {
-    console.log(canvas.squares);
-    w.insertLives(canvas.squares);
+
+    console.log(canvas.addedSquares);
+    w.insertLives(canvas.addedSquares);
     w.toString();
     
     setInterval(function() {
-      //console.log("updating world");
+      //console.log("canvas addedSquares:" + canvas.addedSquares);
+      //canvas.clear();
       w.update();
-      canvas.context.clearRect(0,0,canvas.width,canvas.height);
-      //drawGrid();
-      canvas.init();
       canvas.render(w);
     }, 500);
 
