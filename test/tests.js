@@ -1,5 +1,5 @@
 var Assert = require('./assert.js'),
-  World = require('./world'),
+  World = require('../app/world'),
   assert;
 
 assert = new Assert("Should pass", true===true);
