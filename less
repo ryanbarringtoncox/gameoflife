@@ -1,0 +1,101 @@
+2013-09-13T13:47:27.982833+00:00 app[web.1]:     at Module.load (module.js:356:32)
+2013-09-13T13:47:27.983034+00:00 app[web.1]:     at Function.Module._load (module.js:312:12)
+2013-09-13T13:47:27.983034+00:00 app[web.1]:     at startup (node.js:119:16)
+2013-09-13T13:47:27.983034+00:00 app[web.1]:     at node.js:901:3
+2013-09-13T13:47:27.983034+00:00 app[web.1]:     at Function.Module.runMain (module.js:497:10)
+2013-09-13T13:47:29.683912+00:00 heroku[web.1]: Process exited with status 8
+2013-09-13T13:47:29.699088+00:00 heroku[web.1]: State changed from starting to crashed
+2013-09-13T13:47:29.699847+00:00 heroku[web.1]: State changed from crashed to starting
+2013-09-13T13:47:31.853582+00:00 heroku[web.1]: Starting process with command `node server.js`
+2013-09-13T13:47:32.760573+00:00 app[web.1]: 
+2013-09-13T13:47:32.760771+00:00 app[web.1]: /app/server.js:3
+2013-09-13T13:47:32.760940+00:00 app[web.1]: var server = statik.createServer();
+2013-09-13T13:47:32.760940+00:00 app[web.1]:                     ^
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 	// setup middlewares
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 	var compress = connect.compress();
+2013-09-13T13:47:32.768327+00:00 app[web.1]: TypeError: Object function (opts) {
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 	var options = extend(Object.create(null), defaults, opts);
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 	var static = connect.static(options.root, options);
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 	// start the app on given port. defaults to 3000
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 	var app = connect();
+2013-09-13T13:47:32.768544+00:00 app[web.1]: 	app.use(compress);
+2013-09-13T13:47:32.768544+00:00 app[web.1]: 	app.listen(options.port);
+2013-09-13T13:47:32.768327+00:00 app[web.1]: 
+2013-09-13T13:47:32.768544+00:00 app[web.1]: 
+2013-09-13T13:47:32.768746+00:00 app[web.1]:     at startup (node.js:119:16)
+2013-09-13T13:47:32.768544+00:00 app[web.1]: 	return app;
+2013-09-13T13:47:32.768746+00:00 app[web.1]:     at Function.Module.runMain (module.js:497:10)
+2013-09-13T13:47:32.768544+00:00 app[web.1]:     at Module.load (module.js:356:32)
+2013-09-13T13:47:32.768544+00:00 app[web.1]: 	app.use(static);
+2013-09-13T13:47:32.768746+00:00 app[web.1]:     at node.js:901:3
+2013-09-13T13:47:32.768544+00:00 app[web.1]: } has no method 'createServer'
+2013-09-13T13:47:32.768544+00:00 app[web.1]:     at Object.<anonymous> (/app/server.js:3:21)
+2013-09-13T13:47:32.768544+00:00 app[web.1]:     at Module._compile (module.js:456:26)
+2013-09-13T13:47:32.768544+00:00 app[web.1]:     at Object.Module._extensions..js (module.js:474:10)
+2013-09-13T13:47:32.768746+00:00 app[web.1]:     at Function.Module._load (module.js:312:12)
+2013-09-13T13:47:34.197181+00:00 heroku[web.1]: Process exited with status 8
+2013-09-13T13:47:35.915143+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:47:36.155992+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:47:34.215077+00:00 heroku[web.1]: State changed from starting to crashed
+2013-09-13T13:47:42.160045+00:00 heroku[web.1]: Error R99 (Platform error) -> Failed to launch the dyno within 10 seconds
+2013-09-13T13:47:42.160045+00:00 heroku[web.1]: Stopping process with SIGKILL
+2013-09-13T13:47:44.403724+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:47:46.014769+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:47:46.086755+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:48:19.076171+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:47:44.337910+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:50:24.157514+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:50:24.065015+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:54:44.320620+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:54:44.443236+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T13:57:55.081870+00:00 heroku[web.1]: State changed from crashed to starting
+2013-09-13T13:57:58.600421+00:00 heroku[web.1]: Starting process with command `node server.js`
+2013-09-13T13:57:59.558836+00:00 app[web.1]: var server = statik.createServer();
+2013-09-13T13:57:59.558948+00:00 app[web.1]:                     ^
+2013-09-13T13:57:59.558836+00:00 app[web.1]: 
+2013-09-13T13:57:59.558836+00:00 app[web.1]: /app/server.js:3
+2013-09-13T13:57:59.562069+00:00 app[web.1]: TypeError: Object function (opts) {
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 	var options = extend(Object.create(null), defaults, opts);
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 	// setup middlewares
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 	var compress = connect.compress();
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 	var static = connect.static(options.root, options);
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 	// start the app on given port. defaults to 3000
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 	var app = connect();
+2013-09-13T13:57:59.562069+00:00 app[web.1]: 
+2013-09-13T13:57:59.562255+00:00 app[web.1]: 	app.listen(options.port);
+2013-09-13T13:57:59.562255+00:00 app[web.1]: 
+2013-09-13T13:57:59.562255+00:00 app[web.1]: 	return app;
+2013-09-13T13:57:59.562255+00:00 app[web.1]: } has no method 'createServer'
+2013-09-13T13:57:59.562255+00:00 app[web.1]:     at Module._compile (module.js:456:26)
+2013-09-13T13:57:59.562255+00:00 app[web.1]:     at Object.Module._extensions..js (module.js:474:10)
+2013-09-13T13:57:59.562255+00:00 app[web.1]:     at Object.<anonymous> (/app/server.js:3:21)
+2013-09-13T13:57:59.562255+00:00 app[web.1]: 	app.use(compress);
+2013-09-13T13:57:59.562255+00:00 app[web.1]: 	app.use(static);
+2013-09-13T13:57:59.562255+00:00 app[web.1]:     at Module.load (module.js:356:32)
+2013-09-13T13:57:59.562423+00:00 app[web.1]:     at Function.Module._load (module.js:312:12)
+2013-09-13T13:57:59.562423+00:00 app[web.1]:     at Function.Module.runMain (module.js:497:10)
+2013-09-13T13:57:59.562423+00:00 app[web.1]:     at startup (node.js:119:16)
+2013-09-13T13:57:59.562423+00:00 app[web.1]:     at node.js:901:3
+2013-09-13T13:58:01.019411+00:00 heroku[web.1]: Process exited with status 8
+2013-09-13T13:58:08.956624+00:00 heroku[web.1]: Error R99 (Platform error) -> Failed to launch the dyno within 10 seconds
+2013-09-13T13:58:08.956624+00:00 heroku[web.1]: Stopping process with SIGKILL
+2013-09-13T13:58:01.037502+00:00 heroku[web.1]: State changed from starting to crashed
+2013-09-13T13:59:08+00:00 heroku[slug-compiler]: Slug compilation started
+2013-09-13T13:59:17+00:00 heroku[slug-compiler]: Slug compilation failed: failed to compile Node.js app
+2013-09-13T14:00:48+00:00 heroku[slug-compiler]: Slug compilation started
+2013-09-13T14:01:19.052647+00:00 heroku[api]: Deploy cb20794 by ryan@paleosun.com
+2013-09-13T14:01:19.071041+00:00 heroku[api]: Release v5 created by ryan@paleosun.com
+2013-09-13T14:01:19+00:00 heroku[slug-compiler]: Slug compilation finished
+2013-09-13T14:01:19.855649+00:00 heroku[web.1]: State changed from crashed to starting
+2013-09-13T14:01:21.735742+00:00 heroku[web.1]: Starting process with command `node server.js`
+2013-09-13T14:02:23.357301+00:00 heroku[web.1]: Error R10 (Boot timeout) -> Web process failed to bind to $PORT within 60 seconds of launch
+2013-09-13T14:02:23.357513+00:00 heroku[web.1]: Stopping process with SIGKILL
+2013-09-13T14:02:24.744929+00:00 heroku[web.1]: Process exited with status 137
+2013-09-13T14:02:26.021896+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T14:02:26.068138+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/favicon.ico host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T14:02:27.049136+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path=/ host=agile-harbor-9882.herokuapp.com fwd="152.18.113.162" dyno= connect= service= status=503 bytes=
+2013-09-13T14:02:24.759000+00:00 heroku[web.1]: State changed from starting to crashed
