@@ -16,5 +16,9 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "statik": ">= 1.1.0",
     "brunch": "1.x"
+  },
+  "engine": {
+    "node": "~0.8.14",
+    "npm": "~1.1'
   }
 }
