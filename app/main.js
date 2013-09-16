@@ -11,7 +11,7 @@
   canvas.init();
   startBtn = $('#start');
 
-  w = new World(canvas.width-1,canvas.height-1);
+  w = new World(canvas.width-1,canvas.height-1,10);
 
   startBtn.click(function() {
 
