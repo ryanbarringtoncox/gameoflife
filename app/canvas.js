@@ -3,8 +3,9 @@ function Canvas(document,canvasId) {
   //private vars
   var canvas = document.getElementById(canvasId);
   var context = canvas.getContext('2d');
-  var addedSquares = [];
+  var addedCells = [];
   var mouseDown = false;
+  var capturedCells = [];
 
   //event listeners
   function onMouseDown(e) {
@@ -15,8 +16,8 @@ function Canvas(document,canvasId) {
     y = snapToGrid(y);
 
     var p = x+"_"+y;
-    if (addedSquares.indexOf(p) < 0) {
-      addedSquares.push(p);
+    if (addedCells.indexOf(p) < 0) {
+      addedCells.push(p);
       fillRect(x, y);
     }
    }
@@ -33,19 +34,22 @@ function Canvas(document,canvasId) {
       y = snapToGrid(y);
 
       var p = x+"_"+y;
-      if (addedSquares.indexOf(p) < 0) {
-        addedSquares.push(p);
+      if (addedCells.indexOf(p) < 0) {
+        addedCells.push(p);
         fillRect(x, y);
       }
-
     }
-    
   }
 
   function onMouseUp(e) {
     mouseDown = false;
   }
 
+  canvas.addEventListener("mousedown", onMouseDown, false);
+  canvas.addEventListener("mouseup", onMouseUp, false);
+  canvas.addEventListener("mousemove", onMouseMove, false);
+ 
+  //helpers 
   function drawGrid() {
 
     //draw grid on canvas
@@ -64,12 +68,7 @@ function Canvas(document,canvasId) {
 
   }
   
-  canvas.addEventListener("mousedown", onMouseDown, false);
-  canvas.addEventListener("mouseup", onMouseUp, false);
-  canvas.addEventListener("mousemove", onMouseMove, false);
- 
-  //helpers 
-  function snapToGrid(x) {
+ function snapToGrid(x) {
     var snapped = x - x%10;
     return (snapped);
   }
@@ -90,14 +89,27 @@ function Canvas(document,canvasId) {
 
     height: canvas.height,
 
-    addedSquares: addedSquares,
-
     init: drawGrid,
+
+    captureCells: function() {
+
+      console.log("captureCells called");
+      console.log("addedCells are " + addedCells);
+      capturedCells = addedCells;
+      console.log("populated capturedCells " + capturedCells);
+      addedCells = [];
+      return capturedCells;
+
+    },
+
+    clearCapturedCells: function() {
+      capturedCells = [];  
+    },
 
     render: function(w) {
 
-      console.log("render called and addedSquares are:");
-      console.log(addedSquares);
+      console.log("render called and addedCells are:");
+      console.log(addedCells);
       context.clearRect(0,0,canvas.width,canvas.height);
 
       drawGrid();
