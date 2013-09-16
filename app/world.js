@@ -1,13 +1,12 @@
-function World(x,y) {
+function World(x,y,cellSize) {
 
-  var width, height, lives, offsets;
+  var width, height, lives, offsets,negCellSize;
 
   width = x;
   height = y;
   lives = {}; 
-  //this should scale dynamically
-  //offsets = [[-1,-1], [-1,0],  [-1,1],  [0,-1],  [0,1],  [1,-1],  [1,0],  [1,1] ];
-  offsets = [[-10,-10], [-10,0],  [-10,10],  [0,-10],  [0,10],  [10,-10],  [10,0],  [10,10] ];
+  negCellSize = cellSize * -1;
+  offsets = [[negCellSize,negCellSize], [negCellSize,0],  [negCellSize,cellSize],  [0,negCellSize],  [0,cellSize],  [cellSize,negCellSize],  [cellSize,0],  [cellSize,cellSize] ];
 
   return {
 

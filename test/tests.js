@@ -4,10 +4,10 @@ var Assert = require('./assert.js'),
 
 assert = new Assert("Should pass", true===true);
 
-var w = new World(10,10);
+var w = new World(10,10,1);
 assert = new Assert("Test stringIt()", w.stringIt(1,2)==="1_2");
 
-var world = new World(100, 100);
+var world = new World(100, 100,1);
 assert = new Assert("Tests insertLife()", typeof world.insertLife(0,0) === "object");
 assert = new Assert("Tests insertLife()",  typeof world.insertLife(100,0) === "object");
 world.insertLife(0,0);
