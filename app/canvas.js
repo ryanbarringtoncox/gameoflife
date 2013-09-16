@@ -76,7 +76,7 @@ function Canvas(document,canvasId) {
   function fillRect(x,y) {
     context.beginPath();
     context.rect(x, y, 10, 10 );
-    context.fillStyle = '#ddd';
+    context.fillStyle = '#000';
     context.fill();
   }
 
@@ -92,11 +92,7 @@ function Canvas(document,canvasId) {
     init: drawGrid,
 
     captureCells: function() {
-
-      console.log("captureCells called");
-      console.log("addedCells are " + addedCells);
       capturedCells = addedCells;
-      console.log("populated capturedCells " + capturedCells);
       addedCells = [];
       return capturedCells;
 
@@ -108,15 +104,12 @@ function Canvas(document,canvasId) {
 
     render: function(w) {
 
-      console.log("render called and addedCells are:");
-      console.log(addedCells);
       context.clearRect(0,0,canvas.width,canvas.height);
 
       drawGrid();
 
       var lives = w.getLives();
 
-      //console.log("lives are " + JSON.stringify(lives));
       for (var key in lives) {
         var cellStr = key;
         var cellArr = cellStr.split("_");

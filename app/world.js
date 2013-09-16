@@ -114,8 +114,6 @@ function World(x,y,cellSize) {
     },
 
     update: function() {
-      //console.log("before updating lives are");
-      //console.log(lives);
       var nextGeneration = {};
       var self = this;
       function nabeCallback(nabe) {
@@ -138,7 +136,6 @@ function World(x,y,cellSize) {
         nabes.forEach(nabeCallback);
       }
       lives = nextGeneration;
-      //console.log("after updating lives are");
       //console.log(lives);
     }
   };
