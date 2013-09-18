@@ -24,6 +24,9 @@ function Canvas(document,canvasId) {
 
   function onMouseMove(e) {
     
+    //prevent auto-scrolling on mobile
+    e.preventDefault();
+
     //is mousedown?
     if (mouseDown) {
 
