@@ -46,8 +46,11 @@ function Canvas(document,canvasId) {
   }
 
   canvas.addEventListener("mousedown", onMouseDown, false);
+  canvas.addEventListener("touchstart", onMouseDown, false);
   canvas.addEventListener("mouseup", onMouseUp, false);
+  canvas.addEventListener("touchend", onMouseUp, false);
   canvas.addEventListener("mousemove", onMouseMove, false);
+  canvas.addEventListener("touchmove", onMouseMove, false);
  
   //helpers 
   function drawGrid() {
@@ -123,7 +126,7 @@ function Canvas(document,canvasId) {
 
        }
     }
-  }
+  };
 }
 
 module.exports = Canvas;
