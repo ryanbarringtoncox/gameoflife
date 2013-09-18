@@ -3,12 +3,19 @@
   var World = require('world'),
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
-    sound, w, canvas, startBtn, interval;
+    sound, w, canvas, startBtn, interval, slider;
 
 
   canvas = new Canvas(document, 'main');
   canvas.init();
   startBtn = $('#start');
+  slider = $('#slider'); 
+
+  //slider listener
+  slider.change(function() {
+    //console.log("slider changed to " + this.value);
+    interval = this.value;
+  });
   
   //how often game ticks in ms
   interval = 300;
