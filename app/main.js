@@ -21,6 +21,7 @@
       return false;
   }
 */
+  /*
   //cancel mobile window movement
   document.body.ontouchstart = function(e) {
       if (e && e.preventDefault) { e.preventDefault(); }
@@ -33,6 +34,7 @@
       if (e && e.stopPropagation) { e.stopPropagation(); }
       return false;
   }
+  */
 
   //default time tick in ms
   interval = 300;
