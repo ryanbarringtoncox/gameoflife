@@ -6,7 +6,7 @@
     sound, w, canvas, startBtn, interval, slider;
   
   var canvasElement = document.getElementById('main');
-
+/*
   // do nothing in the event handler except canceling the event
   canvasElement.ondragstart = function(e) {
       if (e && e.preventDefault) { e.preventDefault(); }
@@ -20,7 +20,7 @@
       if (e && e.stopPropagation) { e.stopPropagation(); }
       return false;
   }
-
+*/
   //cancel mobile window movement
   document.body.ontouchstart = function(e) {
       if (e && e.preventDefault) { e.preventDefault(); }
