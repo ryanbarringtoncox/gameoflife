@@ -5,6 +5,35 @@
     PianoSprite = require('./audio/pianosprite'),
     sound, w, canvas, startBtn, interval, slider;
   
+  var canvasElement = document.getElementById('main');
+
+  // do nothing in the event handler except canceling the event
+  canvasElement.ondragstart = function(e) {
+      if (e && e.preventDefault) { e.preventDefault(); }
+      if (e && e.stopPropagation) { e.stopPropagation(); }
+      return false;
+  }
+
+  // do nothing in the event handler except canceling the event
+  canvasElement.onselectstart = function(e) {
+      if (e && e.preventDefault) { e.preventDefault(); }
+      if (e && e.stopPropagation) { e.stopPropagation(); }
+      return false;
+  }
+
+  //cancel mobile window movement
+  document.body.ontouchstart = function(e) {
+      if (e && e.preventDefault) { e.preventDefault(); }
+      if (e && e.stopPropagation) { e.stopPropagation(); }
+      return false;
+  }
+
+  document.body.ontouchmove = function(e) {
+      if (e && e.preventDefault) { e.preventDefault(); }
+      if (e && e.stopPropagation) { e.stopPropagation(); }
+      return false;
+  }
+
   //default time tick in ms
   interval = 300;
 
@@ -31,12 +60,10 @@
   }
 
   startBtn.click(function() {
-
     var capturedCells = canvas.captureCells();
     w.insertLives(capturedCells);
     canvas.clearCapturedCells();
     setTimeout(gameLoop,interval);
-   
   });
 
 

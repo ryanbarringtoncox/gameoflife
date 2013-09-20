@@ -9,6 +9,10 @@ function Canvas(document,canvasId) {
 
   //event listeners
   function onMouseDown(e) {
+    
+    //prevent auto-scrolling on mobile
+    e.preventDefault();
+
     mouseDown = true;
     var x = e.pageX - canvas.offsetLeft;
     var y = e.pageY - canvas.offsetTop;
@@ -20,6 +24,7 @@ function Canvas(document,canvasId) {
       addedCells.push(p);
       fillRect(x, y);
     }
+    return false;
    }
 
   function onMouseMove(e) {
@@ -42,10 +47,14 @@ function Canvas(document,canvasId) {
         fillRect(x, y);
       }
     }
+    return false;
   }
 
   function onMouseUp(e) {
+    //prevent auto-scrolling on mobile
+    e.preventDefault();
     mouseDown = false;
+    return false;
   }
 
   canvas.addEventListener("mousedown", onMouseDown, false);
