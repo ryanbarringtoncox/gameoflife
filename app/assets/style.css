@@ -25,7 +25,3 @@ body,html
     display: block;
     overflow: auto;
 }
-#fix {
-    background: yellow;
-    height: 20px;
-}
