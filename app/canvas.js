@@ -1,4 +1,4 @@
-function Canvas(document,canvasId) {
+function Canvas(document,canvasId,cellSize) {
 
   //private vars
   var canvas = document.getElementById(canvasId);
@@ -16,6 +16,8 @@ function Canvas(document,canvasId) {
     mouseDown = true;
     var x = e.pageX - canvas.offsetLeft;
     var y = e.pageY - canvas.offsetTop;
+    //var x = e.pageX - canvas.offsetLeft;
+    //var y = e.pageY - canvas.offsetTop;
     x = snapToGrid(x);
     y = snapToGrid(y);
 
@@ -68,12 +70,12 @@ function Canvas(document,canvasId) {
   function drawGrid() {
 
     //draw grid on canvas
-    for (var x = 0; x < canvas.width; x+=10) {
+    for (var x = 0; x < canvas.width; x+=cellSize) {
       context.moveTo(x,0);
       context.lineTo(x, canvas.height);
     }
 
-    for (var y = 0; y < canvas.height; y+=10) {
+    for (var y = 0; y < canvas.height; y+=cellSize) {
       context.moveTo(0,y);
       context.lineTo(canvas.width, y);
     }
@@ -84,13 +86,13 @@ function Canvas(document,canvasId) {
   }
   
  function snapToGrid(x) {
-    var snapped = x - x%10;
+    var snapped = x - x%cellSize;
     return (snapped);
   }
 
   function fillRect(x,y) {
     context.beginPath();
-    context.rect(x, y, 10, 10 );
+    context.rect(x, y, cellSize, cellSize );
     context.fillStyle = '#000';
     context.fill();
   }

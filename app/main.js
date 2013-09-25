@@ -4,11 +4,11 @@
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
     sound, w, canvas, startBtn, interval, slider;
-  
+ 
   //default time tick in ms
-  interval = 300;
+  interval = 50;
 
-  canvas = new Canvas(document, 'main');
+  canvas = new Canvas(document, 'main',5);
   canvas.init();
   startBtn = $('#start');
   slider = $('#slider'); 
@@ -19,7 +19,7 @@
     interval = this.value;
   });
   
-  w = new World(canvas.width-1,canvas.height-1,10);
+  w = new World(canvas.width-1,canvas.height-1,5);
 
   var gameLoop = function () {
     capturedCells = canvas.captureCells();
@@ -37,5 +37,7 @@
     setTimeout(gameLoop,interval);
   });
 
+  //start game loop automatically
+  gameLoop();
 
 })();
