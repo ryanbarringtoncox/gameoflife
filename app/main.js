@@ -6,9 +6,9 @@
     sound, w, canvas, startBtn, interval, slider;
  
   //default time tick in ms
-  interval = 50;
+  interval = 100;
 
-  canvas = new Canvas(document, 'main',5);
+  canvas = new Canvas(document, 'main',10);
   canvas.init();
   startBtn = $('#start');
   slider = $('#slider'); 
@@ -19,7 +19,7 @@
     interval = this.value;
   });
   
-  w = new World(canvas.width-1,canvas.height-1,5);
+  w = new World(canvas.width-1,canvas.height-1,10);
 
   var gameLoop = function () {
     capturedCells = canvas.captureCells();
@@ -36,8 +36,5 @@
     canvas.clearCapturedCells();
     setTimeout(gameLoop,interval);
   });
-
-  //start game loop automatically
-  gameLoop();
 
 })();
