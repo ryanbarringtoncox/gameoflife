@@ -9,7 +9,7 @@
   interval = 100;
 
   canvas = new Canvas(document, 'main',10);
-  canvas.init();
+  //canvas.init();
   startBtn = $('#start');
   slider = $('#slider'); 
 

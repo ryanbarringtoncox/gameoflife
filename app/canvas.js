@@ -123,7 +123,7 @@ function Canvas(document,canvasId,cellSize) {
 
       context.clearRect(0,0,canvas.width,canvas.height);
 
-      drawGrid();
+      //drawGrid();
 
       var lives = w.getLives();
 
