@@ -13,12 +13,16 @@
   startBtn = $('#start');
   slider = $('#slider'); 
 
-  //slider listener
-  slider.change(function() {
-    //console.log("slider changed to " + this.value);
-    interval = this.value;
-  });
-  
+  slider.slider({
+    min: 10,
+    max: 999,
+    value: 100,
+  })
+    .on('slide', function(ev) {
+      console.log(this.value);  
+      interval = this.value;
+    });
+
   w = new World(canvas.width-1,canvas.height-1,10);
 
   var gameLoop = function () {
