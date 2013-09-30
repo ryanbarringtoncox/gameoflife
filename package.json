@@ -7,14 +7,14 @@
   "scripts": {
     "start": "brunch watch --server",
     "test": "brunch test",
-    "postinstall": "brunch build --production"
+    "postinstall": "brunch build --optimize"
   },
   "dependencies": {
     "javascript-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
     "uglify-js-brunch": ">= 1.0 < 1.8",
     "clean-css-brunch": ">= 1.0 < 1.8",
-    "brunch": "1.x",
+    "brunch": "1.7.7",
     "node-static": "~0.7.1"
   }
 }
