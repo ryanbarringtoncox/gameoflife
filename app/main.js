@@ -17,6 +17,8 @@
     min: 10,
     max: 999,
     value: 100,
+    tooltip: 'hide',
+    step: 10,
   })
     .on('slide', function(ev) {
       console.log(this.value);  

@@ -1,3 +1,14 @@
+body, .container {
+  background: black;
+}
 #main {
-  background: #efefef;
+  background: #eeeeee;
+}
+#canvas-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 940;
+}
+.no-margin {
+  margin: 0 !important;
 }
