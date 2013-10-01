@@ -32,3 +32,9 @@ body, .container {
 .image-container img {
   float: right;
 }
+.hero-unit {
+  padding: 18px 48px;
+}
+.hero-unit h1 {
+  font-family: 'Contrail One', cursive;
+}
