@@ -12,6 +12,23 @@ body, .container {
 .no-margin {
   margin: 0 !important;
 }
-.hero-unit {
+.margin-top {
   margin-top: 32px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.row {
+  background: #eeeeee;
+}
+.intro {
+  padding-top: 12px;
+  width: 66%;
+  float: left;
+}
+.image-container {
+  width: 33%;
+  float: right;
+}
+.image-container img {
+  float: right;
 }

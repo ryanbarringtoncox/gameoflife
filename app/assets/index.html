@@ -10,19 +10,30 @@
   </head>
   <body>
     <div class="container">
-      <div class="hero-unit">
+      <div class="hero-unit margin-top">
         <h1>Cellular Soundtracks</h1>
-        <p>Draw a cluster of cells on the canvas below and click the Go!</p>
-        <p>
-          Adjust Speed (ms):
-          <input type="text "id="slider" class="span2" value="100" />
-        </p>
-        <p><button id="start" class="btn btn-primary">Go!</button></p>
+        <div class="row no-margin">
+          <div class="intro">
+            <p>Draw a cluster of cells on the canvas below and click the Go!</p>
+            <p>
+              Adjust Speed (ms):
+              <input type="text "id="slider" class="span2" value="100" />
+            </p>
+            <p><button id="start" class="btn btn-primary">Go!</button></p>
+          </div>
+          <div class="image-container">
+            <img src="adapter.png"/>
+            <img src="reel-recorder.png"/>
+          </div>
+        </div>
       </div>
       <div class="row no-margin"> 
         <div id="canvas-container"> 
           <canvas id="main" width="940" height="601"></canvas>
         </div>
+      </div>
+      <div class="row margin-top well"> 
+        <p>Icon Credits: Reel Recorder by Simon Child, Adapter designed by Roderick Chow from the Noun Project</p>
       </div>
    </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
