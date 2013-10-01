@@ -28,6 +28,7 @@ body, .container {
 .image-container {
   width: 33%;
   float: right;
+  margin-top: -60px;
 }
 .image-container img {
   float: right;
