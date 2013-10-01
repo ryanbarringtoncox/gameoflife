@@ -14,10 +14,9 @@
   slider = $('#slider'); 
 
   slider.slider({
-    min: 10,
-    max: 999,
+    min: 40,
+    max: 300,
     value: 100,
-    tooltip: 'hide',
     step: 10,
   })
     .on('slide', function(ev) {
