@@ -3,16 +3,18 @@
   var World = require('world'),
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
-    sound, w, canvas, startBtn, interval, slider;
+    sprite, w, canvas, startBtn, interval, slider;
  
-  //default time tick in ms
-  interval = 100;
-
-  canvas = new Canvas(document, 'main',10);
-  //canvas.init();
+  sprite = new PianoSprite();
+  canvas = new Canvas(document, 'main',10,sprite);
+  w = new World(canvas.width-1,canvas.height-1,10);
   startBtn = $('#start');
   slider = $('#slider'); 
 
+  //default time tick in ms
+  interval = 100;
+
+  //init bootstrap slider
   slider.slider({
     min: 40,
     max: 300,
@@ -20,11 +22,8 @@
     step: 10,
   })
     .on('slide', function(ev) {
-      console.log(this.value);  
       interval = this.value;
     });
-
-  w = new World(canvas.width-1,canvas.height-1,10);
 
   var gameLoop = function () {
     capturedCells = canvas.captureCells();

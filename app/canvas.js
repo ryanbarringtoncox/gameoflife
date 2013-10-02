@@ -1,4 +1,4 @@
-function Canvas(document,canvasId,cellSize) {
+function Canvas(document,canvasId,cellSize,sprite) {
 
   //private vars
   var canvas = document.getElementById(canvasId);
@@ -6,6 +6,9 @@ function Canvas(document,canvasId,cellSize) {
   var addedCells = [];
   var mouseDown = false;
   var capturedCells = [];
+
+  //this should be a dynamic variable
+  var spriteSize = 10;
 
   //event listeners
   function onMouseDown(e) {
@@ -22,11 +25,20 @@ function Canvas(document,canvasId,cellSize) {
     y = snapToGrid(y);
 
     var p = x+"_"+y;
+
+    //if it's available
     if (addedCells.indexOf(p) < 0) {
+
+      //push n draw
       addedCells.push(p);
       fillRect(x, y);
+      
+      //play note 
+      playNote(y);
     }
+
     return false;
+
    }
 
   function onMouseMove(e) {
@@ -43,10 +55,12 @@ function Canvas(document,canvasId,cellSize) {
       x = snapToGrid(x);
       y = snapToGrid(y);
 
+      //if cell is free, push, draw and play note
       var p = x+"_"+y;
       if (addedCells.indexOf(p) < 0) {
         addedCells.push(p);
         fillRect(x, y);
+        playNote(y)
       }
     }
     return false;
@@ -91,10 +105,19 @@ function Canvas(document,canvasId,cellSize) {
   }
 
   function fillRect(x,y) {
+
+    //fill Rectangle
     context.beginPath();
     context.rect(x, y, cellSize, cellSize );
     context.fillStyle = '#000';
     context.fill();
+
+  }
+
+  function playNote(index) {
+    var note = (index/cellSize)%spriteSize + 1;
+    console.log("playing note ".note);
+    sprite.play(note);
   }
 
   //api
@@ -121,13 +144,15 @@ function Canvas(document,canvasId,cellSize) {
 
     render: function(w) {
 
+      //array of notes to play on this tick
+      var notes = [];
       context.clearRect(0,0,canvas.width,canvas.height);
-
-      //drawGrid();
 
       var lives = w.getLives();
 
+      //draw each cell
       for (var key in lives) {
+        
         var cellStr = key;
         var cellArr = cellStr.split("_");
         var x = parseInt(cellArr[0], 10);
@@ -138,7 +163,18 @@ function Canvas(document,canvasId,cellSize) {
 
         fillRect(x, y);
 
+        //figure out the note index, add to notes array if not there already
+        var note = (y/cellSize)%spriteSize + 1;
+        if (notes.indexOf(note) < 0) {
+          notes.push(note);  
+        }
        }
+
+      console.log("playing notes " + notes); 
+      for (var note in notes) {
+        playNote(note);
+      }
+
     }
   };
 }
