@@ -115,8 +115,9 @@ function Canvas(document,canvasId,cellSize,sprite) {
   }
 
   function playNote(index) {
+    console.log("play note called with " + index);
     var note = (index/cellSize)%spriteSize + 1;
-    console.log("playing note ".note);
+    //console.log("playing note " + note);
     sprite.play(note);
   }
 
@@ -164,17 +165,15 @@ function Canvas(document,canvasId,cellSize,sprite) {
         fillRect(x, y);
 
         //figure out the note index, add to notes array if not there already
-        var note = (y/cellSize)%spriteSize + 1;
-        if (notes.indexOf(note) < 0) {
-          notes.push(note);  
+        //var note = (y/cellSize)%spriteSize + 1;
+        if (notes.indexOf(y) < 0) {
+          notes.push(y);  
         }
        }
 
-      console.log("playing notes " + notes); 
-      for (var note in notes) {
-        playNote(note);
+      for (var n in notes) {
+        playNote(notes[n]);
       }
-
     }
   };
 }
