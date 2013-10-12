@@ -173,10 +173,11 @@ function Canvas(document,canvasId,cellSize,sprite) {
 
       //stop all sounds first
       sprite.stop();
-
+      /*
       for (var n in notes) {
         playNote(notes[n]);
       }
+      */
     }
   };
 }

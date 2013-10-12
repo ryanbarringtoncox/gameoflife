@@ -3,8 +3,9 @@
   var World = require('world'),
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
-    sprite, w, canvas, startBtn, interval, slider;
+    sprite, w, canvas, startBtn, interval, slider, isRunning;
  
+  isRunning = false;
   sprite = new PianoSprite();
   canvas = new Canvas(document, 'main',10,sprite);
   w = new World(canvas.width-1,canvas.height-1,10);
@@ -26,19 +27,31 @@
     });
 
   var gameLoop = function () {
-    capturedCells = canvas.captureCells();
+    if (isRunning) {
+      capturedCells = canvas.captureCells();
       w.insertLives(capturedCells);
       w.update();
       canvas.clearCapturedCells();
       canvas.render(w);
       setTimeout(gameLoop,interval);
+    }
   }
 
   startBtn.click(function() {
+    toggleButton();
     var capturedCells = canvas.captureCells();
     w.insertLives(capturedCells);
     canvas.clearCapturedCells();
     setTimeout(gameLoop,interval);
   });
+
+  function toggleButton() {
+    isRunning = !(isRunning);
+    if (isRunning) {
+      startBtn.html("Stop");
+    } else {
+      startBtn.html("Go!");
+    }
+  }
 
 })();
