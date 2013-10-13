@@ -3,13 +3,12 @@
   var World = require('world'),
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
-    sprite, w, canvas, startBtn, interval, slider, isRunning;
+    sprite, w, canvas, startBtn, interval, slider,
+    resetBtn, isRunning;
  
-  isRunning = false;
-  sprite = new PianoSprite();
-  canvas = new Canvas(document, 'main',10,sprite);
-  w = new World(canvas.width-1,canvas.height-1,10);
+  initBoard();
   startBtn = $('#start');
+  resetBtn = $('#reset');
   slider = $('#slider'); 
 
   //default time tick in ms
@@ -44,6 +43,19 @@
     canvas.clearCapturedCells();
     setTimeout(gameLoop,interval);
   });
+
+  resetBtn.click(function() {
+    initBoard();
+    canvas.clear();
+    startBtn.html("Go!");
+  });
+
+  function initBoard() {
+    isRunning = false;
+    sprite = new PianoSprite();
+    canvas = new Canvas(document, 'main',10,sprite);
+    w = new World(canvas.width-1,canvas.height-1,10);
+  }
 
   function toggleButton() {
     isRunning = !(isRunning);

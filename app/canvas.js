@@ -115,7 +115,7 @@ function Canvas(document,canvasId,cellSize,sprite) {
   }
 
   function playNote(index) {
-    console.log("play note called with " + index);
+    //console.log("play note called with " + index);
     var note = (index/cellSize)%spriteSize + 1;
     //console.log("playing note " + note);
     sprite.play(note);
@@ -141,6 +141,10 @@ function Canvas(document,canvasId,cellSize,sprite) {
 
     clearCapturedCells: function() {
       capturedCells = [];  
+    },
+
+    clear: function() {
+      context.clearRect(0,0,canvas.width,canvas.height);
     },
 
     render: function(w) {
