@@ -6,6 +6,7 @@
     sprite, w, canvas, startBtn, interval, slider,
     resetBtn, isRunning;
  
+  //init
   initBoard();
   startBtn = $('#start');
   resetBtn = $('#reset');
@@ -25,6 +26,7 @@
       interval = this.value;
     });
 
+  //main game loop  
   var gameLoop = function () {
     if (isRunning) {
       capturedCells = canvas.captureCells();
@@ -36,6 +38,7 @@
     }
   }
 
+  //when start is clicked
   startBtn.click(function() {
     toggleButton();
     var capturedCells = canvas.captureCells();
@@ -44,12 +47,14 @@
     setTimeout(gameLoop,interval);
   });
 
+  //when reset is clicked
   resetBtn.click(function() {
     initBoard();
     canvas.clear();
     startBtn.html("Go!");
   });
 
+  //clear and start a new game
   function initBoard() {
     isRunning = false;
     sprite = new PianoSprite();
@@ -57,6 +62,7 @@
     w = new World(canvas.width-1,canvas.height-1,10);
   }
 
+  //toggles state of go button
   function toggleButton() {
     isRunning = !(isRunning);
     if (isRunning) {

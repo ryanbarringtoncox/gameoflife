@@ -1,14 +1,22 @@
 function World(x,y,cellSize) {
 
-  var width, height, lives, offsets,negCellSize;
+  var width, height, lives, offsets, negCellSize, history, maxLives, minLives;
 
   width = x;
   height = y;
   lives = {}; 
   negCellSize = cellSize * -1;
   offsets = [[negCellSize,negCellSize], [negCellSize,0],  [negCellSize,cellSize],  [0,negCellSize],  [0,cellSize],  [cellSize,negCellSize],  [cellSize,0],  [cellSize,cellSize] ];
+  history = [];
+  maxLives = 0;
+  minLives = -1;
 
+  //api
   return {
+
+    getHistory: function() {
+      return history
+    },
 
     toString: function() {
       console.log("This world is " + width + " by " + height);
@@ -114,8 +122,10 @@ function World(x,y,cellSize) {
     },
 
     update: function() {
+
       var nextGeneration = {};
       var self = this;
+      var lifeCounter = 0;
       function nabeCallback(nabe) {
         if (!nextGeneration[nabe]) {
           var count = self.getLiveNabeCountString(nabe);
@@ -124,7 +134,10 @@ function World(x,y,cellSize) {
           }
         }
       }
+      
+      //iterate through lives
       for (var key in lives) {
+        lifeCounter++;
         //will this life survive?
         var count = this.getLiveNabeCountString(key);
         //console.log(key + " has " + count + " living neighbors");
@@ -135,8 +148,20 @@ function World(x,y,cellSize) {
         var nabes = this.getNeighborhoodString(key);
         nabes.forEach(nabeCallback);
       }
+
       lives = nextGeneration;
-      //console.log(lives);
+      
+      //add lifeCount to world's history, update max/min lives
+      history.push(lifeCounter);
+      if (lifeCounter > maxLives) {maxLives=lifeCounter}; 
+      if (minLives === -1) {
+        //first tick only set minLives to lifeCounter
+        minLives = lifeCounter; 
+      } else {
+        if (lifeCounter < minLives) {minLives=lifeCounter}; 
+      }
+      //console.log("history is " + history);
+      console.log("min lives is " + minLives + " and maxLives is " + maxLives);
     }
   };
 
