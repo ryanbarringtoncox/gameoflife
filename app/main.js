@@ -5,7 +5,7 @@
     PianoSprite = require('./audio/pianosprite'),
     sprite, w, canvas, startBtn, interval, slider,
     resetBtn, isRunning, spriteSize, minLives, maxLives,
-    lastNotePlayed;
+    lastNotePlayed, sliderMax;
  
   //init
   initBoard();
@@ -13,6 +13,7 @@
   resetBtn = $('#reset');
   slider = $('#slider'); 
   lastNotePlayed = 0;
+  sliderMax = 400
 
   //default time tick in ms
   interval = 100;
@@ -22,12 +23,12 @@
 
   //init bootstrap slider
   slider.slider({
-    min: 40,
-    max: 300,
-    value: 100,
+    min: 100,
+    max: sliderMax,
+    value: 250,
     step: 10,
   }).on('slide', function(ev) {
-      interval = this.value;
+      interval = sliderMax-this.value;
     });
 
   //main game loop  
@@ -71,7 +72,7 @@
   function toggleButton() {
     isRunning = !(isRunning);
     if (isRunning) {
-      startBtn.html("Stop");
+      startBtn.html("Pause");
     } else {
       startBtn.html("Go!");
     }
