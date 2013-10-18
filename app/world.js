@@ -1,6 +1,6 @@
 function World(x,y,cellSize) {
 
-  var width, height, lives, offsets, negCellSize, history, maxLives, minLives;
+  var width, height, lives, offsets, negCellSize, history, maxLives, minLives, numLiveCells;
 
   width = x;
   height = y;
@@ -8,7 +8,7 @@ function World(x,y,cellSize) {
   negCellSize = cellSize * -1;
   offsets = [[negCellSize,negCellSize], [negCellSize,0],  [negCellSize,cellSize],  [0,negCellSize],  [0,cellSize],  [cellSize,negCellSize],  [cellSize,0],  [cellSize,cellSize] ];
   history = [];
-  maxLives = 0;
+  maxLives = numLiveCells = 0;
   minLives = -1;
 
   //api
@@ -42,6 +42,10 @@ function World(x,y,cellSize) {
       c = (a + b) % dim;
       if (c < 0) {c = c + dim};
       return c;
+    },
+
+    getNumCells: function() {
+      return numLiveCells;
     },
 
     getNeighborhood: function(x,y) {
@@ -80,6 +84,14 @@ function World(x,y,cellSize) {
       var nums = nabe.split("_");
       var count = this.getLiveNabeCount(parseInt(nums[0],10), parseInt(nums[1],10));
       return count;
+    },
+
+    getMaxLives: function() {
+      return maxLives;
+    },
+
+    getMinLives: function() {
+      return minLives;
     },
 
     insertLife: function(x,y) {
@@ -152,7 +164,11 @@ function World(x,y,cellSize) {
       lives = nextGeneration;
       
       //add lifeCount to world's history, update max/min lives
-      history.push(lifeCounter);
+      //history.push(lifeCounter);
+      
+      //get current number of live cells
+      numLiveCells = lifeCounter;
+
       if (lifeCounter > maxLives) {maxLives=lifeCounter}; 
       if (minLives === -1) {
         //first tick only set minLives to lifeCounter
@@ -161,7 +177,7 @@ function World(x,y,cellSize) {
         if (lifeCounter < minLives) {minLives=lifeCounter}; 
       }
       //console.log("history is " + history);
-      console.log("min lives is " + minLives + " and maxLives is " + maxLives);
+      //console.log("min lives is " + minLives + " and maxLives is " + maxLives);
     }
   };
 

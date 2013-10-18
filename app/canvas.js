@@ -33,8 +33,6 @@ function Canvas(document,canvasId,cellSize,sprite) {
       addedCells.push(p);
       fillRect(x, y);
       
-      //play note 
-      playNote(y);
     }
 
     return false;
@@ -55,12 +53,11 @@ function Canvas(document,canvasId,cellSize,sprite) {
       x = snapToGrid(x);
       y = snapToGrid(y);
 
-      //if cell is free, push, draw and play note
+      //if cell is free, push, draw 
       var p = x+"_"+y;
       if (addedCells.indexOf(p) < 0) {
         addedCells.push(p);
         fillRect(x, y);
-        playNote(y)
       }
     }
     return false;
@@ -114,13 +111,6 @@ function Canvas(document,canvasId,cellSize,sprite) {
 
   }
 
-  function playNote(index) {
-    //console.log("play note called with " + index);
-    var note = (index/cellSize)%spriteSize + 1;
-    //console.log("playing note " + note);
-    sprite.play(note);
-  }
-
   //api
   return {
   
@@ -149,8 +139,6 @@ function Canvas(document,canvasId,cellSize,sprite) {
 
     render: function(w) {
 
-      //array of notes to play on this tick
-      var notes = [];
       context.clearRect(0,0,canvas.width,canvas.height);
 
       var lives = w.getLives();
@@ -168,21 +156,8 @@ function Canvas(document,canvasId,cellSize,sprite) {
 
         fillRect(x, y);
 
-        //figure out the note index, add to notes array if not there already
-        //var note = (y/cellSize)%spriteSize + 1;
-        if (notes.indexOf(y) < 0) {
-          notes.push(y);  
-        }
-       }
-
-      //stop all sounds first
-      sprite.stop();
-      /*
-      for (var n in notes) {
-        playNote(notes[n]);
       }
-      */
-    }
+   }
   };
 }
 
