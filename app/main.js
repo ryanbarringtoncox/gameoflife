@@ -3,23 +3,27 @@
   var World = require('world'),
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
-    sprite, w, canvas, startBtn, interval, slider,
-    resetBtn, isRunning, spriteSize, minLives, maxLives,
-    lastNotePlayed, sliderMax;
+    DrumSprite = require('./audio/drumsprite'),
+    pianoSprite, w, canvas, startBtn, interval, slider,
+    resetBtn, isRunning, pianoSpriteSize, minLives, maxLives,
+    lastNotePlayed, sliderMax, beatBtn, drumSprite, loopCounter;
  
   //init
   initBoard();
   startBtn = $('#start');
   resetBtn = $('#reset');
+  beatBtn = $('#beats');
   slider = $('#slider'); 
   lastNotePlayed = 0;
   sliderMax = 400
+  beatsOn = true;
+  loopCounter = 0;
 
   //default time tick in ms
   interval = 100;
 
   //this shouldn't be hard-coded
-  spriteSize = 10;
+  pianoSpriteSize = 10;
 
   //init bootstrap slider
   slider.slider({
@@ -40,6 +44,13 @@
       canvas.clearCapturedCells();
       canvas.render(w);
       noteHandler();
+      
+      //we don't want drums on every tick
+      if (loopCounter%4==0) {
+        drumSprite.play(1); 
+      }
+
+      loopCounter++;
       setTimeout(gameLoop,interval);
     }
   };
@@ -60,11 +71,23 @@
     startBtn.html("Go!");
   });
 
+  //when reset is clicked
+  beatBtn.click(function() {
+    if (beatsOn) {
+      beatBtn.html("BeatsOn");
+      beatsOn=false;
+    } else {
+      beatBtn.html("BeatsOff");
+      beatsOn=true;
+    }
+  });
+
   //clear and start a new game
   function initBoard() {
     isRunning = false;
-    sprite = new PianoSprite();
-    canvas = new Canvas(document, 'main',10,sprite);
+    pianoSprite = new PianoSprite();
+    drumSprite = new DrumSprite();
+    canvas = new Canvas(document, 'main',10,pianoSprite);
     w = new World(canvas.width-1,canvas.height-1,10);
   }
 
@@ -93,28 +116,28 @@
     //console.log("range is " + range);
 
     //play note based on calculations
-    notePlayer(currNumCells, range, spriteSize, minLives);
+    notePlayer(currNumCells, range, pianoSpriteSize, minLives);
 
   }
 
   //plays the notes
-  function notePlayer(currNumCells, range, spriteSize, offset) {
+  function notePlayer(currNumCells, range, pianoSpriteSize, offset) {
 
     //slice is 'width' of note 
-    var slice = range/spriteSize;
+    var slice = range/pianoSpriteSize;
 
-    //map currNumCells to sprite note, this is basically a dynamic switch statement
-    for (var i=1; i<=spriteSize; i++) {
+    //map currNumCells to pianoSprite note, this is basically a dynamic switch statement
+    for (var i=1; i<=pianoSpriteSize; i++) {
 
       if (currNumCells < (slice*i)+offset) {
 
         //if note is same as last note played then exit, no need to play again
         //if (i === lastNotePlayed) {return;}
 
-        //sprite.stop();
-        sprite.play(i);
+        //pianoSprite.stop();
+        pianoSprite.play(i);
         console.log("currNumCells is " + currNumCells + " and range is " + range + " and offset is " + offset);
-        console.log("notePlayer() just played sprite note " + i);
+        console.log("notePlayer() just played pianoSprite note " + i);
 
         //keep track of note
         lastNotePlayed = i;
