@@ -1,9 +1,9 @@
 #Musical Game of Life
-A musical exploration of Conway's Game of Life.
+A musical exploration of Conway's Game of Life.  Please view in 'Desktop' Chrome for now.
 
-http://cellularsoundtrack.herokuapp.com/
+http://cellsounds.herokuapp.com/
 
-http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+You'll need node and npm to run locally.
 
     npm install -g brunch
 
@@ -15,3 +15,4 @@ http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
     brunch watch --server
 
+http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
