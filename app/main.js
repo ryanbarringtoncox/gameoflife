@@ -4,9 +4,11 @@
     Canvas = require('canvas'),
     PianoSprite = require('./audio/pianosprite'),
     DrumSprite = require('./audio/drumsprite'),
+    BassSprite = require('./audio/basssprite'),
     pianoSprite, w, canvas, startBtn, interval, slider,
     resetBtn, isRunning, pianoSpriteSize, minLives, maxLives,
-    lastNotePlayed, sliderMax, beatBtn, drumSprite, loopCounter;
+    lastNotePlayed, sliderMax, beatBtn, drumSprite, loopCounter,
+    bassSprite;
  
   //init
   initBoard();
@@ -59,6 +61,15 @@
       //backbeat
       if (loopCounter%8==0 && beatsOn) {
         drumSprite.play(17); 
+        bassSprite.play(3);
+      }
+
+      if (loopCounter%8==3 && beatsOn) {
+        bassSprite.play(1);
+      }
+
+      if (loopCounter%8==6 && beatsOn) {
+        bassSprite.play(2);
       }
 
       //ting!
@@ -103,6 +114,7 @@
     isRunning = false;
     pianoSprite = new PianoSprite();
     drumSprite = new DrumSprite();
+    bassSprite = new BassSprite();
     canvas = new Canvas(document, 'main',10,pianoSprite);
     w = new World(canvas.width-1,canvas.height-1,10);
   }
