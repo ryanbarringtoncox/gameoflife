@@ -20,7 +20,7 @@
   loopCounter = 0;
 
   //default time tick in ms
-  interval = 100;
+  interval = 200;
 
   //this shouldn't be hard-coded
   pianoSpriteSize = 10;
@@ -29,7 +29,7 @@
   slider.slider({
     min: 100,
     max: sliderMax,
-    value: 250,
+    value: interval,
     step: 10,
   }).on('slide', function(ev) {
       interval = sliderMax-this.value;
@@ -38,6 +38,7 @@
   //main game loop  
   var gameLoop = function () {
     if (isRunning) {
+      loopCounter++;
       capturedCells = canvas.captureCells();
       w.insertLives(capturedCells);
       w.update();
@@ -45,12 +46,27 @@
       canvas.render(w);
       noteHandler();
       
-      //we don't want drums on every tick
-      if (loopCounter%4==0) {
+      //kick
+      if (loopCounter%4==0 && beatsOn) {
         drumSprite.play(1); 
       }
 
-      loopCounter++;
+      //hihat
+      if (loopCounter%4==2 && beatsOn) {
+        drumSprite.play(2); 
+      }
+
+      //backbeat
+      if (loopCounter%8==0 && beatsOn) {
+        drumSprite.play(17); 
+      }
+
+      //ting!
+      if (loopCounter%8==7 && beatsOn) {
+        console.log("boo");
+        drumSprite.play(6); 
+      }
+
       setTimeout(gameLoop,interval);
     }
   };
@@ -136,8 +152,8 @@
 
         //pianoSprite.stop();
         pianoSprite.play(i);
-        console.log("currNumCells is " + currNumCells + " and range is " + range + " and offset is " + offset);
-        console.log("notePlayer() just played pianoSprite note " + i);
+        //console.log("currNumCells is " + currNumCells + " and range is " + range + " and offset is " + offset);
+        //console.log("notePlayer() just played pianoSprite note " + i);
 
         //keep track of note
         lastNotePlayed = i;
