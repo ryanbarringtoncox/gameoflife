@@ -46,11 +46,15 @@
       w.update();
       canvas.clearCapturedCells();
       canvas.render(w);
-      noteHandler();
+      
+      //calling noteHandler plays the melody, bassIndex stores current sprite index for melody
+      var bassIndex = noteHandler()%3+1;
+      console.log("bassIndex is " + bassIndex);
       
       //kick
       if (loopCounter%4==0 && beatsOn) {
         drumSprite.play(1); 
+        bassSprite.play(bassIndex);
       }
 
       //hihat
@@ -60,22 +64,21 @@
 
       //backbeat
       if (loopCounter%8==0 && beatsOn) {
-        drumSprite.play(17); 
-        bassSprite.play(3);
+        //drumSprite.play(17); 
+        //bassSprite.play(bassIndex);
       }
 
       if (loopCounter%8==3 && beatsOn) {
-        bassSprite.play(1);
+        //bassSprite.play(bassIndex);
       }
 
-      if (loopCounter%8==6 && beatsOn) {
-        bassSprite.play(2);
+      if (loopCounter%8==4 && beatsOn) {
+        //bassSprite.play((bassIndex+1)%3+1);
       }
 
       //ting!
       if (loopCounter%8==7 && beatsOn) {
-        console.log("boo");
-        drumSprite.play(6); 
+        //drumSprite.play(6); 
       }
 
       setTimeout(gameLoop,interval);
@@ -144,7 +147,10 @@
     //console.log("range is " + range);
 
     //play note based on calculations
-    notePlayer(currNumCells, range, pianoSpriteSize, minLives);
+    var bassIndex = notePlayer(currNumCells, range, pianoSpriteSize, minLives);
+
+    //send this back to game loop for bass notes
+    return bassIndex;
 
   }
 
@@ -170,10 +176,14 @@
         //keep track of note
         lastNotePlayed = i;
 
-        //once we play a note, exit this loop
-        return;
+        //once we play a note, exit this loop, return index for bass
+        return i;
       } 
     } 
+
+    //fallback in case we don't enter 'if' condition, play highest note
+    pianoSprite.play(pianoSpriteSize);
+    return pianoSpriteSize;
   }
 
 })();
