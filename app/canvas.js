@@ -1,4 +1,4 @@
-function Canvas(document,canvasId,cellSize,sprite) {
+function Canvas(document,canvasId,cellSize) {
 
   //private vars
   var canvas = document.getElementById(canvasId);

@@ -118,7 +118,7 @@
     pianoSprite = new PianoSprite();
     drumSprite = new DrumSprite();
     bassSprite = new BassSprite();
-    canvas = new Canvas(document, 'main',10,pianoSprite);
+    canvas = new Canvas(document, 'main',10);
     w = new World(canvas.width-1,canvas.height-1,10);
   }
 
