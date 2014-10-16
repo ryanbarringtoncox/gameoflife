@@ -1,6 +1,6 @@
 var World = require("../world.js");
 
-var w = new World(10,10);
+var w = new World(10,10,1);
 w.insertLife(4,4);
 w.insertLife(4,5);
 w.insertLife(4,6);
